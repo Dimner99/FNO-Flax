@@ -61,10 +61,10 @@ Each level builds upon the previous one, demonstrating how to scale FNO training
 
 This approach  does not give significant performance boost when training is performed on cpu, the performance is almost the same. When training on gpu, tpu the performance boost is **bigger** the **smaller** the mini batches are. In general it is a function of the gpu computation power and the computation needed for each mini batch. When we don't use the scan approach and implement the feeding of the data using a for loop there is a time needed for the computation inside the gpu and a time needed for the cpu-gpu communication for each *"batch"* of computations. If the time of the gpu computation is big enough then the scan method will not boost as much the performance because the time overhead for each batch is primarily created for the computation, the communication time needed can be ignored. When the computation time is small enough then the time overhead is being made by the cpu-gpu communication and this is when the scan method can boost performance so much because it feeds the gpu more efficiently.
 
-#### In more detail
 
-In pure CPU training, this “scan” strategy yields negligible speed-up—the overall runtime remains essentially unchanged.  
-On accelerators (GPU/TPU), however, the benefit grows as mini-batch sizes shrink.
+#### In more details
+
+In pure CPU training, this “scan” strategy yields negligible speed‐up—the overall runtime remains essentially unchanged. On accelerators (GPU/TPU), however, the benefit grows as mini‐batch sizes shrink.
 
 Define:
 
@@ -76,7 +76,7 @@ Define:
 Each of the mini-batches incurs both compute and sync costs:
 
 $$
-T_{\mathrm{loop}} = N \,(t_{\mathrm{gpu}} + t_{\mathrm{sync}})
+T_{\mathrm{loop}} = N\\,(t_{\mathrm{gpu}} + t_{\mathrm{sync}})
 $$
 
 **With scan (fused execution):**
@@ -84,23 +84,23 @@ $$
 The steps’ computations are batched on the device, so you pay the sync cost only once:
 
 $$
-T_{\mathrm{scan}} = N \, t_{\mathrm{gpu}} + t_{\mathrm{sync}}
+T_{\mathrm{scan}} = N\\,t_{\mathrm{gpu}} + t_{\mathrm{sync}}
 $$
 
 **Relative speed-up:**
 
 $$
 \text{Speed-up} = \frac{T_{\mathrm{loop}}}{T_{\mathrm{scan}}}
-= \frac{N\,(t_{\mathrm{gpu}} + t_{\mathrm{sync}})}{N\,t_{\mathrm{gpu}} + t_{\mathrm{sync}}}
+= \frac{N\\,(t_{\mathrm{gpu}} + t_{\mathrm{sync}})}{N\\,t_{\mathrm{gpu}} + t_{\mathrm{sync}}}
 $$
 
-- If $t_{\mathrm{gpu}} \gg t_{\mathrm{sync}}$, then  
-  $T_{\mathrm{loop}} \approx N\,t_{\mathrm{gpu}}$ and  
-  $T_{\mathrm{scan}} \approx N\,t_{\mathrm{gpu}}$ → minimal speed-up.  
+- If $t_{\mathrm{gpu}} \\gg t_{\mathrm{sync}}$, then  
+  $T_{\mathrm{loop}} \\approx N\\,t_{\mathrm{gpu}}$ and  
+  $T_{\mathrm{scan}} \\approx N\\,t_{\mathrm{gpu}}$ → minimal speed-up.  
 
-- If $t_{\mathrm{gpu}} \ll t_{\mathrm{sync}}$, then  
-  $T_{\mathrm{loop}} \approx N\,t_{\mathrm{sync}}$ while  
-  $T_{\mathrm{scan}} \approx t_{\mathrm{sync}}$ → nearly $N \times$ faster execution.
+- If $t_{\mathrm{gpu}} \\ll t_{\mathrm{sync}}$, then  
+  $T_{\mathrm{loop}} \\approx N\\,t_{\mathrm{sync}}$ while  
+  $T_{\mathrm{scan}} \\approx t_{\mathrm{sync}}$ → nearly $N \\times$ faster execution.
 
 
 ## Reference
