@@ -1,6 +1,6 @@
 # Fourier Neural Operator (FNO) Implementation with JAX/Flax
 
-This repository implements Fourier Neural Operators using JAX and Flax, showcasing four different levels of optimization for distributed training.
+This repository implements 1D Fourier Neural Operator using JAX and Flax, showcasing four different levels of optimization for distributed training.
 
 ## What is a Fourier Neural Operator (FNO)?
 
@@ -91,13 +91,8 @@ $$\frac{T_{\mathrm{loop}}}{T_{\mathrm{scan}}}
   $\,T_{\mathrm{scan}}\approx t_{\mathrm{sync}}$ , yielding nearly $N ×$ faster execution
 
 
-## Citation
+## Reference
 
-```bibtex
-@article{li2020fourier,
-  title={Fourier Neural Operator for Parametric Partial Differential Equations},
-  author={Li, Zongyi and Kovachki, Nikola and Azizzadenesheli, Kamyar and Liu, Burigede and Bhattacharya, Kaushik and Stuart, Andrew and Anandkumar, Anima},
-  journal={arXiv preprint arXiv:2010.08895},
-  year={2020}
-}
-```
+**Fourier Neural Operator for Parametric Partial Differential Equations**  
+Zongyi Li, Nikola B Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Kaushik Bhattacharya, Andrew Stuart, Anima Anandkumar  
+ICLR 2021
