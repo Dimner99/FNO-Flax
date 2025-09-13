@@ -39,7 +39,7 @@ This repository demonstrates four progressive optimization strategies:
 ### 2. **Scan Optimization** (`fno_scan_optimization.ipynb`)
 
 - Single-device training
-- Uses `jax.lax.scan` for memory-efficient loops
+- Uses `jax.lax.scan` for efficient loops
 
 ### 3. **Parallel Training** (`fno_parallel.ipynb`)
 
@@ -50,7 +50,7 @@ This repository demonstrates four progressive optimization strategies:
 ### 4. **Scan-Optimized Parallel** (`fno_parallel_scan.ipynb`)
 
 - Multi-device data parallelism
-- Uses `jax.lax.scan` for memory-efficient loops
+- Uses `jax.lax.scan` for efficient loops
 
 
 Each level builds upon the previous one, demonstrating how to scale FNO training from single-device to highly optimized parallel training.
